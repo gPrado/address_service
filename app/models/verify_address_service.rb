@@ -1,3 +1,5 @@
+require 'actionwebservice'
+
 class VerifyAddressService < ActionWebService::Base
   web_service_api VerifyAddressApi
 

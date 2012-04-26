@@ -1,3 +1,5 @@
+require 'actionwebservice'
+
 class Address < ActionWebService::Struct
   member :logradouro, :string
   member :bairro,     :string

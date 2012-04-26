@@ -1,4 +1,4 @@
-class AddressServiceException < StandardError; end
+require 'actionwebservice'
 
 class CepAddressService < ActionWebService::Base
   web_service_api CepAddressApi

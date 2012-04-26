@@ -1,3 +1,5 @@
+require 'actionwebservice'
+
 class SearchAddressService < ActionWebService::Base
   web_service_api SearchAddressApi
 
