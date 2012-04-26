@@ -9,7 +9,7 @@ class VerifyAddressService < ActionWebService::Base
       errors << AddressError.new( :code => "40002",
                                   :description => "CEP deve estar no formato XXXXX-XXX")
     end
-    unless /\A[a-zA-z]{2}\z/.match(address.uf)
+    unless /\A[a-zA-Z]{2}\z/.match(address.uf)
       errors << AddressError.new( :code => "40002",
                                   :description => "UF deve estar no formato XX")
     end
