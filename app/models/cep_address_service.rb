@@ -11,15 +11,13 @@ class CepAddressService < ActionWebService::Base
     elsif !/\A\d{5}\-\d{3}\z/.match(cep)
       errors << AddressError.new( :code => "40002",
                                   :description => "CEP deve estar no formato XXXXX-XXX")
-    elsif cep=="13083-852"
-      errors << AddressError.new( :code => "40401",
-                                  :description => "Nenhum resultado encontrado para o CEP #{cep}")
     else
-      address = Address.new( :logradouro => "R. Albert Einstein",
-                             :bairro => "Cidade Universitaria",
-                             :localidade => "Campinas",
-                             :uf => "SP",
-                             :cep => cep)
+      if record = AddressRecord.find_by_cep(cep)
+        address = Address.from_record(record)
+      else
+        errors << AddressError.new( :code => "40401",
+                                    :description => "Nenhum resultado encontrado para o CEP #{cep}")
+      end
     end
 
     CepAddressResult.new(
