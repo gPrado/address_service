@@ -16,4 +16,12 @@ class AddressRecord < ActiveRecord::Base
   validates :localidade, :presence => true,
                          :allow_blank => false
 
+  searchable :auto_index => true, :auto_remove => true do
+    text :cep,        :boost => 5.0
+    text :localidade, :boost => 2.0
+    text :logradouro, :boost => 2.0
+    text :bairro,     :boost => 2.0
+    text :uf
+  end
+
 end

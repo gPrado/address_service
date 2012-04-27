@@ -8,20 +8,15 @@ class SearchAddressService < ActionWebService::Base
     if query.blank?
       errors << AddressError.new( :code => "40001",
                                   :description => "Busca deve ser preenchida")
-    elsif query.include?("sindo")
-      errors << AddressError.new( :code => "40402",
-                                  :description => "Nenhum resultado encontrado para a busca por #{query}")
     else
-      addresses = [ Address.new( :logradouro => "R. Buarque de Macedo",
-                                 :bairro => query,
-                                 :localidade => "Campinas",
-                                 :uf => "SP",
-                                 :cep => "13073-010"),
-                    Address.new( :logradouro => "R. Albert Einstein",
-                                 :bairro => query,
-                                 :localidade => "Campinas",
-                                 :uf => "SP",
-                                 :cep => "13083-852")]
+      records = AddressRecord.search { fulltext(query, :minimum_match => 1) }.results
+
+      if records.empty?
+        errors << AddressError.new( :code => "40402",
+                                    :description => "Nenhum resultado encontrado para a busca por #{query}")
+      else
+        addresses = records.map { |record| Address.from_record(record) }
+      end
     end
 
     SearchAddressResult.new(
