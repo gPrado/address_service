@@ -6,7 +6,7 @@ class AddressServicesController < ApplicationController
   wsdl_service_name 'AddressService'
   wsdl_namespace 'urn:AddressService'
 
-  web_service_dispatching_mode :delegated
+  web_service_dispatching_mode :layered
 
   web_service :cep_address,    CepAddressService.new
   web_service :search_address, SearchAddressService.new
