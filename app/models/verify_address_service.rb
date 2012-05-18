@@ -13,15 +13,15 @@ class VerifyAddressService < ActionWebService::Base
       errors << AddressError.new( :code => "40002",
                                   :description => "UF deve estar no formato XX")
     end
-    if address.logradouro.blank?
+    if address.logradouro.blank? || address.logradouro.include?("::")
       errors << AddressError.new( :code => "40001",
                                   :description => "Logradouro deve ser preenchido")
     end
-    if address.localidade.blank?
+    if address.localidade.blank? || address.localidade.include?("::")
       errors << AddressError.new( :code => "40001",
                                   :description => "Localidade deve ser preenchido")
     end
-    if address.bairro.blank?
+    if address.bairro.blank? || address.bairro.include?("::")
       errors << AddressError.new( :code => "40001",
                                   :description => "Bairro deve ser preenchido")
     end
