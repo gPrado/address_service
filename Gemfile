@@ -7,7 +7,7 @@ gem 'rails', '3.1.0'
 
 gem 'sqlite3'
 
-gem 'dps-actionwebservice', :git => "git://github.com/livestation/actionwebservice.git"
+gem 'dps-actionwebservice', :git => "git://github.com/gPrado/actionwebservice.git"
 
 gem 'sunspot_rails'
 gem 'sunspot_solr'
